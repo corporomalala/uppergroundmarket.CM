@@ -1,0 +1,46 @@
+---
+layout: default
+---
+<header class="banner">
+	<div class="banner-header">
+		<h1 class="banner-header-title">The Old Yard Sale is Coming to Instagram!</h1>
+		
+		<a href="https://instagram.com/UppergroundMarket_ACM" class="banner-header-button">Bid on Instagram!</a>
+	</div>
+	
+	<div class="banner-catalog">
+		<div class="banner-catalog-instagram">
+			<a href="https://instagram.com/UppergroundMarket_ACM" class="banner-catalog-instagram-handle">@UppergroundMarket_ACM</a>
+			<span class="banner-catalog-instagram-hr"></span>
+			<a href="https://instagram.com/UppergroundMarket_ACM"><img class="banner-catalog-instagram-icon" src="/assets/images/icon_instagram_black.png" /></a>
+		</div>
+		
+		<div class="banner-catalog-highlights"><ul class="banner-catalog-highlights-list">{% for i in (1..3) %}
+			<li class="banner-catalog-highlights-list-item"><div class="banner-catalog-product">
+				<img class="banner-catalog-product-img" src="/assets/images/placeholder-1x1.png" />
+				<h5 class="banner-catalog-product-name">{% if forloop.first %}Red Stilettos{% elsif forloop.last %}+{% else %}&nbsp;{% endif %}</h5>
+			</div></li>{% endfor %}
+		</ul></div>
+	</div>
+</header>
+
+<section class="header">
+	<div class="header-about">
+		<figure class="header-about-logo">
+			<img src="/assets/images/{{ site.name | remove: ' ' }}-logo_black_blank.png" />
+		</figure>
+		
+		<h2 class="header-about-subtitle d-cssCentered">Get in line to bid on preloved and thrifted items right from the comfort of your phone!</h2>
+	</div>
+	
+	<div class="header-reviews">
+		<blockquote class="header-reviews-quote d-cssCentered">
+			<q class="header-reviews-quote-q">Upperground Market. The items look so good! And there is a PEP/PAXI right next to my place!</q>
+			<cite class="header-reviews-quote-cite">Anonymous Yaga Girl,<br /> online reviewer<br /> 2024</cite>
+		</blockquote>
+		
+		<figure class="header-reviews-figure">
+			<img src="/assets/images/placeholder-1x1.png" class="header-reviews-figure-img" />
+		</figure>
+	</div>
+</section>

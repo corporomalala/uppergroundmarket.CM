@@ -1,0 +1,227 @@
+/*** Z-INDEXES ***/
+.header-reviews-figure:before { position: relative; z-index: 10; }
+.header-reviews-figure-img { position: relative; z-index: 20; }
+/*** END Z-INDEXES ***/
+
+/*** COLORS ***/
+.header-about-logo,
+.header-reviews-figure:before { background-color: #A38E89; }
+
+.banner-catalog-instagram-hr,
+.banner-header-button { background-color: black; }
+.banner-catalog-product,
+.banner-catalog-product-name,
+.header-about,
+.header-about-logo { border-color: black; }
+
+html { background-color: #eee; }
+
+.banner-catalog-product-name,
+.header-about { background-color: white; }
+.banner-header-button { color: white; }
+/*** END COLORS ***/
+
+/*** FONTS ***/
+@font-face{font-family:"Bob";src:url("../../assets/fonts/Bob.TTF");}
+@font-face{font-family:"Impact";src:url("../../assets/fonts/impact.TTF");}
+
+* { font-family: "Impact", sans-serif; word-spacing: .15em; }
+/*
+.banner-header-title { font-family: "Bob", serif; word-spacing: initial !important; }
+*/
+
+.banner-header-title { font-size: 4em; }
+.header-about-subtitle { font-size: 2.5em; }
+.header-reviews-quote-q { font-size: 1.25em; }
+
+.banner-header-title,
+.header-about-subtitle { font-weight: bold; }
+.banner-catalog-product,
+.header-about,
+.header-reviews-figure,
+.header-reviews-quote-q { text-align: center; }
+.header-about-subtitle { text-align: left; }
+.header-reviews-quote-cite { text-align: right; }
+.banner-catalog-product-name { text-transform: uppercase; }
+/*** END FONTS ***/
+
+/*** MEDIA ***/
+.banner-catalog-highlights-list-item:first-child .banner-catalog-product,
+.banner-catalog-highlights-list-item:first-child .banner-catalog-product-img { background-image: url("/assets/images/products/red-stilettos_with-logo.png"); }
+	.banner-catalog-product {
+		background-repeat: no-repeat;
+		background-position: top right;
+		background-size: cover;
+	}
+
+.header-reviews-figure-img { background-image: url("/assets/images/placeholder-reviewer.png"); }
+	.header-reviews-figure-img {
+		background-repeat: no-repeat;
+		background-repeat: bottom center;
+		background-size: 100% auto;
+	}
+
+.banner-catalog-product-img { visibility: hidden; }
+/*** END MEDIA ***/
+
+/*** COMPONENTS ***/
+	/*** .banner ***/
+	.banner-catalog-highlights-list,
+	.banner-catalog-instagram { display: flex; }
+	.banner-catalog-instagram { align-items: center; }
+	.banner-catalog-highlights-list-item { flex: 1; }
+		
+	.banner-header {
+		padding: 1.9em 0 1.9em 1.9em;
+	}
+	.banner-header-button {
+		display: inline-block;
+		padding: 1em;
+	}
+
+	.banner-catalog-highlights {
+		overflow: hidden;
+	}
+	.banner-catalog-highlights-list {
+		width: 120%;
+	}
+	.banner-catalog-highlights-list-item {
+		padding: 1em;
+	}
+	.banner-catalog-instagram {
+		position: relative; left: 50%;
+		width: 50%;
+		padding: 1.9em 1.9em 0 0;
+	}
+	.banner-catalog-instagram-hr {
+		width: 100%; height: .19em;
+		margin: 0 1em;
+		display: block;
+	}
+	.banner-catalog-instagram-icon {
+		width: 1.9em; height: auto;
+	}
+	.banner-catalog-product {
+		border-width: .1em; border-style: solid;
+	}
+	.banner-catalog-product-name {
+		position: relative; top: 1em;
+		display: inline-block;
+		padding: 1em 1.9em;
+		border-width: 0 0 .1em 0; border-style: solid;
+		border-radius: 3em;
+	}
+		.banner-catalog-product-name { visibility: hidden; }
+		.banner-catalog-highlights-list-item:first-child .banner-catalog-product-name,
+		.banner-catalog-highlights-list-item:last-child .banner-catalog-product-name { visibility: visible !important; }
+		.banner-catalog-product:hover .banner-catalog-product-name,
+		.banner-catalog-product:active .banner-catalog-product-name,
+		.banner-catalog-product:focus .banner-catalog-product-name {// visibility: visible !important; }
+		
+		.banner-catalog-highlights-list-item:last-child .banner-catalog-product-name {
+//			text-indent: -9999px;
+			position: relative; left: -19%;
+		}
+		
+	/*** .header ****/
+	.header-about {
+		position: relative;
+		border-width: .1em .1em .1em 0; border-style: solid;
+	}
+	.header-about-logo {
+		position: relative; top: -12.5vw; left: -7%;
+		width: 50%;
+		display: inline-block;
+		padding: 1em 1.9em 1.9em 1em;
+		border-width: 0 0 .1em 0; border-style: solid;
+		border-radius: 50%;
+	}
+	.header-about-subtitle {
+		width: 100%;
+		padding: 0 1em 0 .75em;
+	}
+	
+	.header-reviews { display: flex; }
+	.header-reviews { flex-direction: column; }
+	.header-reviews { align-items: center; }
+	.header-reviews-figure { flex: 1; }
+
+	.header-reviews {
+		padding: 0 3em;
+	}
+	.header-reviews-quote {
+	}
+	.header-reviews-quote-q,
+	.header-reviews-quote-cite {
+		display: block;
+	}
+	.header-reviews-quote-cite {
+		padding-top: 1.9em;
+	}
+	
+	.header-reviews-figure {
+		position: relative;
+		padding-top: 1em;
+	}
+	.header-reviews-figure:before {
+		content: ""; position: absolute; top: 0; left: 0;
+		display: block;
+		width: 100%; height: 50%;
+		border-width: 0 0 .1em 0; border-style: solid;
+		border-radius: 3em;
+	}
+	.header-reviews-figure-img {
+		width: auto; height: 100%;
+	}
+/*** END COMPONENTS ***/
+
+/*** MEDIA-QUERIES ***/
+@media screen and (max-width: 55em) {
+	html, body, main { font-size: 14px; }
+	
+	.header { margin-top: 12.5vw; }
+	.header-about { margin-right: 7%; }
+	.header-about-subtitle { position: relative; top: -.5em; }
+	
+	.header-reviews-quote-q { padding-top: 1.9em; }
+}
+@media screen and (min-width: 55em) {
+	html, body, main { font-size: 16px; }
+	
+	.banner { display: flex; }
+	.banner-catalog { flex: 1; }
+
+	.banner-header { width: 40%; }
+	
+	.header { display: flex; }
+	.header-reviews { flex: 1; }
+	
+	.header-about { width: 55%; }
+	
+	.header { margin-top: 1.9em; }
+	
+	.header-about-subtitle,
+	.header-reviews-quote { height: 12.5vw; }
+	.header-about-subtitle {
+		position: absolute; left: 0; bottom: 0;
+	}
+}
+/*** END MEDIA-QUERIES ***/
+
+/*** DECORATION ***/
+	/*** .d-cssCentered ***/
+	.d-cssCentered {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+		.d-cssCentered.header-about-subtitle { justify-content: initial !important; }
+		.d-cssCentered.header-reviews-quote { align-items: initial !important; }
+		.d-cssCentered.header-reviews-quote { flex-direction: column; }
+/*** END DECORATION ***/
+
+/*** TO DELETE ***/
+.banner-catalog-product {
+	background-color: black;
+}
+/*** TO DELETE ***/
