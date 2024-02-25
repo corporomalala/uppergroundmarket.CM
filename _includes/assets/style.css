@@ -54,12 +54,14 @@ html { background-color: #eee; }
 		background-size: cover;
 	}
 
-.header-reviews-figure-img { background-image: url("/assets/images/placeholder-reviewer.png"); }
+.header-reviews-figure-img { background-image: url("/assets/images/reviewer-1.png"); }
 	.header-reviews-figure-img {
 		background-repeat: no-repeat;
 		background-repeat: bottom center;
 		background-size: 100% auto;
 	}
+	
+.header-reviews-figure-img {// filter: grayscale(100%); }
 
 .banner-catalog-product-img { visibility: hidden; }
 /*** END MEDIA ***/
