@@ -6,9 +6,9 @@
 /*** COLORS ***/
 .header-about-logo,
 .header-reviews-figure:before {
-//	background-color: #A38E89;
+	background-color: #A38E89;
 //	background-color: #BE1528;
-	background-color: black;
+//	background-color: black;
 }
 
 .banner-catalog-instagram-hr,
@@ -52,7 +52,7 @@ html { background-color: #eee; }
 
 /*** MEDIA ***/
 .banner-catalog-highlights-list-item:nth-child(1) .banner-catalog-product,
-.banner-catalog-highlights-list-item:nth-child(1) .banner-catalog-product-img { background-image: url("/assets/images/products/red-stilettos_with-logo_new.png"); }
+.banner-catalog-highlights-list-item:nth-child(1) .banner-catalog-product-img { background-image: url("/assets/images/products/red-stilettos_with-logo.png"); }
 .banner-catalog-highlights-list-item:nth-child(2) .banner-catalog-product,
 .banner-catalog-highlights-list-item:nth-child(2) .banner-catalog-product-img { background-image: url("/assets/images/products/sold-1.png"); }
 	.banner-catalog-product {
