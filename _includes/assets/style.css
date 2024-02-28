@@ -47,13 +47,16 @@ html { background-color: #eee; }
 /*** END FONTS ***/
 
 /*** MEDIA ***/
-.banner-catalog-highlights-list-item:first-child .banner-catalog-product,
-.banner-catalog-highlights-list-item:first-child .banner-catalog-product-img { background-image: url("/assets/images/products/red-stilettos_with-logo.png"); }
+.banner-catalog-highlights-list-item:nth-child(1) .banner-catalog-product,
+.banner-catalog-highlights-list-item:nth-child(1) .banner-catalog-product-img { background-image: url("/assets/images/products/red-stilettos_with-logo.png"); }
+.banner-catalog-highlights-list-item:nth-child(2) .banner-catalog-product,
+.banner-catalog-highlights-list-item:nth-child(2) .banner-catalog-product-img { background-image: url("/assets/images/products/sold-1.png"); }
 	.banner-catalog-product {
 		background-repeat: no-repeat;
-		background-position: top right;
 		background-size: cover;
 	}
+	.banner-catalog-highlights-list-item:nth-child(1) .banner-catalog-product { background-position: top right; }
+	.banner-catalog-highlights-list-item:nth-child(2) .banner-catalog-product { background-position: bottom right; }
 
 .header-reviews-figure-img { background-image: url("/assets/images/reviewer-1.png"); }
 	.header-reviews-figure-img {
