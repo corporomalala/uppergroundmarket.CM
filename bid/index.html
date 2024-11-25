@@ -138,13 +138,15 @@
 		  console.log("Document data:", docSnap.data());
 		  
 		  vLIVEuserID = docSnap.data().DBuserID;
-		  vLIVEhighestBid = docSnap.data().DDhighestBid;
+		  vLIVEhighestBid = docSnap.data().DBhighestBid;
+
+		  vAPPhighestBid = vLIVEhighestBid;
 		} else {
 		  // docSnap.data() will be undefined in this case
 		  console.log("No such document!");
 		}
 
-//        document.getElementById('vAPPhighestBid').textContent = `$${vAPPhighestBid}`;
+        document.getElementById('tagHighestBid').textContent = `$${vAPPhighestBid}`;
 
         document.getElementById('tagPlaceBid').addEventListener('click', function() {
             const vAPPbidAmount = parseFloat(document.getElementById('tagBidAmount').value);
