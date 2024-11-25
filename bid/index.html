@@ -62,13 +62,13 @@
             background-color: #218838;
         }
 
-        .message {
+        .tagMessage {
             margin-top: 20px;
             text-align: center;
             color: red;
         }
 
-        .countdown {
+        .tagCountdown {
             font-size: 18px;
             text-align: center;
             margin-top: 20px;
@@ -84,22 +84,23 @@
             <p>Description: A beautiful vintage watch in excellent condition.</p>
         </div>
         <div class="bid-info">
-            <h2>Current Highest Bid: <span id="highestBid">$100</span></h2>
+            <h2>Starting Bid: <span id="tagStartingBid">$100</span></h2>
+            <h2>Current Highest Bid: <span id="tagHighestBid">$0</span></h2>
         </div>
         <div class="bid-form">
-            <input type="number" id="bidAmount" placeholder="Enter your bid" min="100">
-			<input type="submit" id="placeBid" value="Place Bid" />
+            <input type="number" id="tagBidAmount" placeholder="Enter your bid" min="100">
+			<input type="submit" id="tagPlaceBid" value="Place Bid" />
 			<!--
             <button id="placeBid">Place Bid</button>
 			-->
         </div>
-        <div id="message" class="message"></div>
-        <div id="countdown" class="countdown">Time Remaining: 24:00:00</div>
+        <div id="tagMessage" class="tagMessage"></div>
+        <div id="tagCountdown" class="tagCountdown">Time Remaining: 24:00:00</div>
     </div>
     <script type="module">
         // Import the necessary Firebase modules
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
-        import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
+        import { getFirestore, doc, getDoc, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
         import { getDatabase, ref, set, onValue } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js';
         import { getAnalytics } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js';
 
@@ -121,49 +122,65 @@
 //        const database = getDatabase(firestore);
         const analytics = getAnalytics(app);
 
-		let startingBid = 100;
-        let highestBid = startingBid; // Starting bid
+		let vAPPstartingBid = 100;
+        let vAPPhighestBid = 0; // Starting bid
         let countdownInterval;
         let timeRemaining = 24 * 60 * 60; // 24 hours in seconds
+		
+		
+		var vAPPuserID = "user123";
+		var vAPPproductId = "product1";
+		var vLIVEuserID, vLIVEhighestBid;
+		const docRef = doc(database, 'bids', vAPPproductId);
+		const docSnap = await getDoc(docRef);
 
-        document.getElementById('highestBid').textContent = `$${highestBid}`;
+		if (docSnap.exists()) {
+		  console.log("Document data:", docSnap.data());
+		  
+		  vLIVEuserID = docSnap.data().DBuserID;
+		  vLIVEhighestBid = docSnap.data().DDhighestBid;
+		} else {
+		  // docSnap.data() will be undefined in this case
+		  console.log("No such document!");
+		}
 
-        document.getElementById('placeBid').addEventListener('click', function() {
-            const bidAmount = parseFloat(document.getElementById('bidAmount').value);
-            const messageElement = document.getElementById('message');
+//        document.getElementById('vAPPhighestBid').textContent = `$${vAPPhighestBid}`;
+
+        document.getElementById('tagPlaceBid').addEventListener('click', function() {
+            const vAPPbidAmount = parseFloat(document.getElementById('tagBidAmount').value);
+            const tagMessage = document.getElementById('tagMessage');
 
             // Check if the bid amount is valid
-            if ((isNaN(bidAmount) || bidAmount <= startingBid) && startingBid == highestBid) {
-                messageElement.textContent = `The starting bid is $${highestBid}.`;
+            if ((isNaN(vAPPbidAmount) || vAPPbidAmount < vAPPstartingBid) && vAPPhighestBid < vAPPstartingBid) {
+                tagMessage.textContent = `The starting bid is $${vAPPstartingBid}.`;
                 return;
             }
-            if (isNaN(bidAmount) || bidAmount <= highestBid) {
-                messageElement.textContent = `Your bid must be higher than the current highest bid of $${highestBid}.`;
+            if (isNaN(vAPPbidAmount) || vAPPbidAmount <= vAPPhighestBid) {
+                tagMessage.textContent = `Your bid must be higher than the current highest bid of $${vAPPhighestBid}.`;
                 return;
             }
 
             // Check if the bid increment is a multiple of 25
-            const increment = bidAmount - highestBid;
+            const increment = vAPPbidAmount - vAPPhighestBid;
             if (increment % 25 !== 0) {
-                messageElement.textContent = 'Bid increments must be multiples of $25.';
+			alert(vAPPbidAmount + " - " + vAPPhighestBid);
+                tagMessage.textContent = 'Bid increments must be multiples of $25.';
                 return;
             }
 			
-			var vAPPuserId = "user123";
-			var vAPPproductId = "product1";
 			// Update database const bidsRef = ref(database, 'bids/' + productId);
             const bidsRef = doc(database, 'bids', vAPPproductId);
 			try {
 				// Attempt to set the bid data
 				setDoc(bidsRef, {
-					DBuserId: userId,
-					DBhighestBid: bidAmount,
+					DBuserID: vAPPuserID,
+					DBhighestBid: vAPPbidAmount,
 					DBtimestamp: Date.now()
 				},
 				{ merge: true });
 
 			// Clear the input field if the set operation is successful
-			document.getElementById('bidAmount').value = '';
+			document.getElementById('tagBidAmount').value = '';
 			console.log("Bid placed successfully");
 			} catch (error) {
 				// Handle errors here
@@ -172,25 +189,25 @@
 			}
 
             // Update highest bid and display success message
-            highestBid = bidAmount;
-            document.getElementById('highestBid').textContent = `$${highestBid}`;
-            messageElement.textContent = 'Your bid has been placed successfully!';
+            vAPPhighestBid = vAPPbidAmount;
+            document.getElementById('tagHighestBid').textContent = `$${vAPPhighestBid}`;
+            tagMessage.textContent = 'Your bid has been placed successfully!';
 
             // Start the countdown if this is the first bid
-            if (highestBid === bidAmount) {
+            if (vAPPhighestBid === vAPPbidAmount) {
                 startCountdown();
             }
 
             // Clear the input field
-            document.getElementById('bidAmount').value = '';
+            document.getElementById('tagBidAmount').value = '';
         });
 
         function startCountdown() {
             countdownInterval = setInterval(function() {
                 if (timeRemaining <= 0) {
                     clearInterval(countdownInterval);
-                    document.getElementById('countdown').textContent = 'Bidding has ended.';
-                    document.getElementById('placeBid').disabled = true; // Disable bidding
+                    document.getElementById('tagCountdown').textContent = 'Bidding has ended.';
+                    document.getElementById('tagPlaceBid').disabled = true; // Disable bidding
                     return;
                 }
 
@@ -200,7 +217,7 @@
                 const minutes = Math.floor((timeRemaining % 3600) / 60);
                 const seconds = timeRemaining % 60;
 
-                document.getElementById('countdown').textContent = `Time Remaining: ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                document.getElementById('tagCountdown').textContent = `Time Remaining: ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
             }, 1000);
         }
     </script>
