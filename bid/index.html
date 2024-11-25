@@ -156,9 +156,9 @@
 			try {
 				// Attempt to set the bid data
 				setDoc(bidsRef, {
-					userId: userId,
-					highestBid: bidAmount,
-					timestamp: Date.now()
+					DBuserId: userId,
+					DBhighestBid: bidAmount,
+					DBtimestamp: Date.now()
 				},
 				{ merge: true });
 
