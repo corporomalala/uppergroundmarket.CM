@@ -84,8 +84,8 @@
             <p>Description: A beautiful vintage watch in excellent condition.</p>
         </div>
         <div class="bid-info">
-            <h2>Starting Bid: <span id="tagStartingBid">$100</span></h2>
-            <h2>Current Highest Bid: <span id="tagHighestBid">$0</span></h2>
+            <h2>Starting Bid: <span id="tagStartingBid">---</span></h2>
+            <h2>Current Highest Bid: <span id="tagHighestBid">---</span></h2>
         </div>
         <div class="bid-form">
             <input type="number" id="tagBidAmount" placeholder="Enter your bid" min="100">
@@ -122,7 +122,7 @@
 //        const database = getDatabase(firestore);
         const analytics = getAnalytics(app);
 
-		let vAPPstartingBid = 100;
+		let vAPPstartingBid = 0;
         let vAPPhighestBid = 0; // Starting bid
         let countdownInterval;
         let timeRemaining = 24 * 60 * 60; // 24 hours in seconds
@@ -130,23 +130,26 @@
 		
 		var vAPPuserID = "user123";
 		var vAPPproductId = "product1";
-		var vLIVEuserID, vLIVEhighestBid;
+		var vLIVEuserID, vLIVEhighestBid, vLIVEstartingBid;
 		const docRef = doc(database, 'bids', vAPPproductId);
 		const docSnap = await getDoc(docRef);
 
 		if (docSnap.exists()) {
 		  console.log("Document data:", docSnap.data());
 		  
-		  vLIVEuserID = docSnap.data().DBuserID;
 		  vLIVEhighestBid = docSnap.data().DBhighestBid;
+		  vLIVEuserID = docSnap.data().DBuserID;
+		  vLIVEstartingBid = docSnap.data().DBstartingBid;
 
 		  vAPPhighestBid = vLIVEhighestBid;
+		  vAPPstartingBid = vLIVEstartingBid;
 		} else {
 		  // docSnap.data() will be undefined in this case
 		  console.log("No such document!");
 		}
 
         document.getElementById('tagHighestBid').textContent = `$${vAPPhighestBid}`;
+        document.getElementById('tagStartingBid').textContent = `$${vAPPstartingBid}`;
 
         document.getElementById('tagPlaceBid').addEventListener('click', function() {
             const vAPPbidAmount = parseFloat(document.getElementById('tagBidAmount').value);
